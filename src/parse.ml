@@ -20,17 +20,22 @@ let extract_class_features line =
     let content = String.sub content 0 (String.length content - 1) in
     String.split_on_char '\n' content
     |> List.filter (fun s -> String.trim s <> "")
-    |> List.map (fun s -> {
-      name = String.trim (String.sub s 1 (String.length s - 1));
-      visibility = (match (String.trim s).[0] with
+    |> List.map (fun s ->
+      let trimmed = String.trim s in
+      let visibility = match trimmed.[0] with
         | '+' -> "public"
         | '-' -> "private"
         | '#' -> "protected"
         | _ -> "unknown"
-      );
-      id = "1";
-      feature_type = if String.contains s '(' then Method else Attribute;
-    })
+      in
+      let name = String.trim (String.sub trimmed 1 (String.length trimmed - 1)) in
+      {
+        name = name;
+        visibility = visibility;
+        id = "1";
+        feature_type = if String.contains trimmed '(' then Method else Attribute;
+      }
+    )
   | _ -> []
 
 let parse_class line =
