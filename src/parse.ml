@@ -8,10 +8,15 @@ open Types
 open Xml_gen
 
 let extract_class_name line =
-  let after_class = String.trim (String.sub line 6 (String.length line - 6)) in
-  match String.split_on_char '{' after_class with
-  | feature::_ -> String.trim feature
-  | [] -> after_class
+  let prefix = "class " in
+  let prefix_length = String.length prefix in
+  if String.starts_with ~prefix line then
+    let after_class = String.trim (String.sub line (prefix_length) (String.length line - prefix_length)) in
+    match String.split_on_char '{' after_class with
+    | class_name::_ -> String.trim class_name
+    | [] -> after_class
+  else
+      ""
 
 let extract_class_features line =
   match String.split_on_char '{' line with
