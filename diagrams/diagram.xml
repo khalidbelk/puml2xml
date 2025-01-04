@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?><XMI xmlns:UML="href://org.omg/UML/1.3" xmi.version="1.1">
+    <XMI.header>
+        <XMI.documentation>
+            <XMI.exporter>PlantUML</XMI.exporter>
+            <XMI.exporterVersion>1.2024.7</XMI.exporterVersion>
+        </XMI.documentation>
+        <XMI.metamodel xmi.name="UML" xmi.version="1.4"/>
+    </XMI.header>
+    <XMI.content>
+        <UML:Model name="PlantUML" xmi.id="model1">
+            <UML:Namespace.ownedElement>
+                <UML:Class name="Main" xmi.id="cl0002">
+                    <UML:Classifier.feature>
+                        <UML:Operation name="main(String[] args)" visibility="public" xmi.id="att23"/>
+                    </UML:Classifier.feature>
+                </UML:Class>
+                <UML:Class name="Cli" xmi.id="cl0003">
+                    <UML:Classifier.feature>
+                        <UML:Attribute name="Scanner sc" visibility="private" xmi.id="att24"/>
+                        <UML:Attribute name="Commands commands" visibility="private" xmi.id="att25"/>
+                        <UML:Attribute name="Handler handler" visibility="private" xmi.id="att26"/>
+                        <UML:Operation name="run()" visibility="public" xmi.id="att27"/>
+                        <UML:Operation name="readCommands() : String[]" visibility="private" xmi.id="att28"/>
+                        <UML:Operation name="execute(String[] input)" visibility="private" xmi.id="att29"/>
+                    </UML:Classifier.feature>
+                </UML:Class>
+                <UML:Class name="Commands" xmi.id="cl0004">
+                    <UML:Classifier.feature>
+                        <UML:Attribute name="Scanner sc" visibility="private" xmi.id="att30"/>
+                        <UML:Attribute name="boolean running" visibility="private" xmi.id="att31"/>
+                        <UML:Attribute name="Crud crud" visibility="private" xmi.id="att32"/>
+                        <UML:Operation name="Commands(Scanner sc)" visibility="public" xmi.id="att33"/>
+                        <UML:Operation name="createProduct()" visibility="public" xmi.id="att34"/>
+                        <UML:Operation name="list()" visibility="public" xmi.id="att35"/>
+                        <UML:Operation name="exit()" visibility="public" xmi.id="att36"/>
+                        <UML:Operation name="isRunning() : boolean" visibility="public" xmi.id="att37"/>
+                    </UML:Classifier.feature>
+                </UML:Class>
+                <UML:Class name="Handler" xmi.id="cl0005">
+                    <UML:Classifier.feature>
+                        <UML:Attribute name="Map&lt;String, Consumer&lt;Commands&gt;&gt; commands" visibility="private" xmi.id="att38"/>
+                        <UML:Operation name="Handler(Commands commandsObject)" visibility="public" xmi.id="att39"/>
+                        <UML:Operation name="getCommand(String commandName) : Consumer&lt;Commands&gt;" visibility="public" xmi.id="att40"/>
+                    </UML:Classifier.feature>
+                </UML:Class>
+                <UML:Class name="Crud" xmi.id="cl0006">
+                    <UML:Classifier.feature>
+                        <UML:Attribute name="Map&lt;String, Supplier&lt;ClothingItem&gt;&gt; itemTypesMap" visibility="private" xmi.id="att41"/>
+                        <UML:Attribute name="ArrayList&lt;ClothingItem&gt; products" visibility="private" xmi.id="att42"/>
+                        <UML:Attribute name="StorageManager storageManager" visibility="private" xmi.id="att43"/>
+                        <UML:Attribute name="updateProduct" visibility="public" xmi.id="att44"/>
+                        <UML:Operation name="Crud()" visibility="public" xmi.id="att45"/>
+                        <UML:Operation name="createProduct(String productType, String name," visibility="public" xmi.id="att46"/>
+                        <UML:Operation name="String color, String size, float price) : ClothingItem" xmi.id="att47"/>
+                        <UML:Operation name="readProducts()" visibility="public" xmi.id="att48"/>
+                        <UML:Operation name="deleteProduct(String productId)" visibility="public" xmi.id="att49"/>
+                        <UML:Operation name="loadProducts()" visibility="public" xmi.id="att50"/>
+                        <UML:Operation name="saveProducts()" visibility="public" xmi.id="att51"/>
+                    </UML:Classifier.feature>
+                </UML:Class>
+                <UML:Class name="StorageManager" xmi.id="cl0007">
+                    <UML:Classifier.feature>
+                        <UML:Attribute name="String Filename" visibility="private" xmi.id="att52"/>
+                        <UML:Operation name="saveProducts(ArrayList&lt;ClothingItem&gt; products)" visibility="public" xmi.id="att53"/>
+                        <UML:Operation name="loadProducts() : ArrayList&lt;ClothingItem&gt;" visibility="public" xmi.id="att54"/>
+                    </UML:Classifier.feature>
+                </UML:Class>
+                <UML:Class isAbstract="true" name="ClothingItem" xmi.id="cl0008">
+                    <UML:Classifier.feature>
+                        <UML:Attribute name="String productId" visibility="private" xmi.id="att55"/>
+                        <UML:Attribute name="String name" visibility="private" xmi.id="att56"/>
+                        <UML:Attribute name="String color" visibility="private" xmi.id="att57"/>
+                        <UML:Attribute name="String size" visibility="private" xmi.id="att58"/>
+                        <UML:Attribute name="Float price" visibility="private" xmi.id="att59"/>
+                        <UML:Attribute name="List&lt;String&gt; VALID_SIZES" visibility="public" xmi.id="att60"/>
+                        <UML:Attribute name="List&lt;String&gt; VALID_ITEM_TYPES" visibility="public" xmi.id="att61"/>
+                        <UML:Operation name="setCustomAttribute(Scanner sc)" visibility="public" xmi.id="att62"/>
+                        <UML:Operation name="getType(): String" visibility="public" xmi.id="att63"/>
+                        <UML:Operation name="ClothingItem(String productId, String name, String color, String size, Float price)" visibility="public" xmi.id="att64"/>
+                        <UML:Operation name="isValidSize(String size) : boolean" visibility="public" xmi.id="att65"/>
+                        <UML:Operation name="isValidItemType(String itemType) : boolean" visibility="public" xmi.id="att66"/>
+                        <UML:Operation name="getProductId(): String" visibility="public" xmi.id="att67"/>
+                        <UML:Operation name="getName(): String" visibility="public" xmi.id="att68"/>
+                        <UML:Operation name="getColor(): String" visibility="public" xmi.id="att69"/>
+                        <UML:Operation name="getSize(): String" visibility="public" xmi.id="att70"/>
+                        <UML:Operation name="getPrice() : Float" visibility="public" xmi.id="att71"/>
+                        <UML:Operation name="setProductId(String productId)" visibility="public" xmi.id="att72"/>
+                        <UML:Operation name="setName(String name)" visibility="public" xmi.id="att73"/>
+                        <UML:Operation name="setColor(String color)" visibility="public" xmi.id="att74"/>
+                        <UML:Operation name="setSize(String size)" visibility="public" xmi.id="att75"/>
+                        <UML:Operation name="setPrice(Float price)" visibility="public" xmi.id="att76"/>
+                    </UML:Classifier.feature>
+                </UML:Class>
+                <UML:Class name="Jacket" xmi.id="cl0009">
+                    <UML:Classifier.feature>
+                        <UML:Attribute name="String material" visibility="private" xmi.id="att77"/>
+                        <UML:Operation name="Jacket(String productId, String name, String color, String size," visibility="public" xmi.id="att78"/>
+                        <UML:Operation name="Float price, String material)" xmi.id="att79"/>
+                        <UML:Operation name="getMaterial() : String" visibility="public" xmi.id="att80"/>
+                        <UML:Operation name="setMaterial(String material)" visibility="public" xmi.id="att81"/>
+                        <UML:Operation name="getType() : String" visibility="public" xmi.id="att82"/>
+                        <UML:Operation name="setCustomAttribute(Scanner sc)" visibility="public" xmi.id="att83"/>
+                        <UML:Operation name="toString() : String" visibility="public" xmi.id="att84"/>
+                    </UML:Classifier.feature>
+                </UML:Class>
+                <UML:Class name="Jeans" xmi.id="cl0010">
+                    <UML:Classifier.feature>
+                        <UML:Attribute name="String fit" visibility="private" xmi.id="att85"/>
+                        <UML:Operation name="Jeans(String productId, String name, String color, String size," visibility="public" xmi.id="att86"/>
+                        <UML:Operation name="Float price, String fit)" xmi.id="att87"/>
+                        <UML:Operation name="getFit() : String" visibility="public" xmi.id="att88"/>
+                        <UML:Operation name="setFit(String fit)" visibility="public" xmi.id="att89"/>
+                        <UML:Operation name="getType() : String" visibility="public" xmi.id="att90"/>
+                        <UML:Operation name="setCustomAttribute(Scanner sc)" visibility="public" xmi.id="att91"/>
+                        <UML:Operation name="toString() : String" visibility="public" xmi.id="att92"/>
+                    </UML:Classifier.feature>
+                </UML:Class>
+                <UML:Class name="Shoes" xmi.id="cl0011">
+                    <UML:Classifier.feature>
+                        <UML:Operation name="Shoes(String productId, String name, String color, String size, Float price)" visibility="public" xmi.id="att93"/>
+                        <UML:Operation name="getType() : String" visibility="public" xmi.id="att94"/>
+                        <UML:Operation name="setCustomAttribute(Scanner sc)" visibility="public" xmi.id="att95"/>
+                        <UML:Operation name="toString() : String" visibility="public" xmi.id="att96"/>
+                    </UML:Classifier.feature>
+                </UML:Class>
+            </UML:Namespace.ownedElement>
+        </UML:Model>
+    </XMI.content>
+</XMI>

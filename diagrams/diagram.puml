@@ -1,0 +1,125 @@
+@startuml
+
+class Main {
+    +main(String[] args)
+}
+
+class Cli {
+    -Scanner sc
+    -Commands commands
+    -Handler handler
+    +run()
+    -readCommands() : String[]
+    -execute(String[] input)
+}
+
+class Commands {
+    -Scanner sc
+    -boolean running
+    -Crud crud
+    +Commands(Scanner sc)
+    +createProduct()
+    +list()
+    +exit()
+    +isRunning() : boolean
+}
+
+class Handler {
+    -Map<String, Consumer<Commands>> commands
+    +Handler(Commands commandsObject)
+    +getCommand(String commandName) : Consumer<Commands>
+}
+
+class Crud {
+    -Map<String, Supplier<ClothingItem>> itemTypesMap
+    -ArrayList<ClothingItem> products
+    -StorageManager storageManager
+    +Crud()
+    +createProduct(String productType, String name,
+        String color, String size, float price) : ClothingItem
+    +readProducts()
+    +updateProduct
+    +deleteProduct(String productId)
+    +loadProducts()
+    +saveProducts()
+}
+
+class StorageManager{
+    -String Filename
+    +saveProducts(ArrayList<ClothingItem> products)
+    +loadProducts() : ArrayList<ClothingItem>
+}
+
+abstract class ClothingItem {
+    -String productId
+    -String name
+    -String color
+    -String size
+    -Float price
+    +setCustomAttribute(Scanner sc)
+    +getType(): String
+    +List<String> VALID_SIZES
+    +List<String> VALID_ITEM_TYPES
+    +ClothingItem(String productId, String name, String color, String size, Float price)
+    +isValidSize(String size) : boolean
+    +isValidItemType(String itemType) : boolean
+    +getProductId(): String
+    +getName(): String
+    +getColor(): String
+    +getSize(): String
+    +getPrice() : Float
+    +setProductId(String productId)
+    +setName(String name)
+    +setColor(String color)
+    +setSize(String size)
+    +setPrice(Float price)
+}
+
+
+class Jacket {
+    -String material
+    +Jacket(String productId, String name, String color, String size,
+        Float price, String material)
+    +getMaterial() : String
+    +setMaterial(String material)
+    +getType() : String
+    +setCustomAttribute(Scanner sc)
+    +toString() : String
+}
+
+class Jeans {
+    -String fit
+    +Jeans(String productId, String name, String color, String size,
+        Float price, String fit)
+    +getFit() : String
+    +setFit(String fit)
+    +getType() : String
+    +setCustomAttribute(Scanner sc)
+    +toString() : String
+}
+
+class Shoes {
+    +Shoes(String productId, String name, String color, String size, Float price)
+    +getType() : String
+    +setCustomAttribute(Scanner sc)
+    +toString() : String
+}
+
+Main --> "1" Cli
+
+Cli *-- "1" Handler
+Cli *-- "1" Commands
+
+Commands *-- "1" Crud
+
+Handler --> "1" Commands
+
+Crud *-- "1" StorageManager
+Crud *-- "0..*" ClothingItem
+Crud ..> ClothingItem
+
+ClothingItem <|-- Jacket
+ClothingItem <|-- Jeans
+ClothingItem <|-- Shoes
+
+@enduml

@@ -1,0 +1,11 @@
+# Dune build and generated files
+_build/
+bin/
+lib/
+test/
+
+# Output xml file
+out.xml
+
+# Output executable
+puml2xml

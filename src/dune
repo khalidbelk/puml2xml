@@ -1,0 +1,11 @@
+(executable
+  (name main)
+  (modules
+    main
+    xml_chunks
+    types
+    file_io
+    parse
+    xml_gen
+  )
+)
