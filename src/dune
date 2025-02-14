@@ -1,5 +1,6 @@
 (executable
   (name main)
+  (libraries str)
   (modules
     main
     xml_chunks
@@ -7,5 +8,6 @@
     file_io
     parse
     xml_gen
+    utils
   )
 )

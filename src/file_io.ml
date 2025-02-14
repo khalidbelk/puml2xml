@@ -1,29 +1,23 @@
 (*
-  Puml2xml - A PlantUML to XML generator
+  Puml2xml - A PlantUML to XML converter
   @khalidbelk, 2025
   File: file_io.ml
 *)
 
 let read_file filename =
-  let input_channel = open_in filename in
-  try
-    try
-      while true do
-        let line = input_line input_channel in
-        print_endline line
-      done
-    with End_of_file ->
-      close_in input_channel
-  with e ->
-      close_in input_channel;
-      raise e
+  let input_ch = open_in filename in
+  let file_content = really_input_string input_ch (in_channel_length input_ch) in
+  close_in input_ch;
+  file_content
 
 let out_file = "out.xml"
-let writeToFile () =
-  let output_channel = open_out out_file in
+
+let writeToFile content =
   try
-    output_string output_channel "Hello from the future";
-    close_out output_channel
-  with e ->
+    let output_channel = open_out out_file in
+    output_string output_channel content;
     close_out output_channel;
-    raise e
+    Ok ()
+  with
+    | Sys_error msg -> Error ("Error writing to file: " ^ msg)
+    | e -> Error ("Unexpected error while writing to file: " ^ Printexc.to_string e)

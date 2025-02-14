@@ -1,8 +1,10 @@
 (*
-  Puml2xml - A PlantUML to XML generator
+  Puml2xml - A PlantUML to XML converter
   @khalidbelk, 2025
   File: xml_chunks.ml
 *)
+
+(* Static XML chunks needed for the final output *)
 
 let xml_header = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><XMI xmlns:UML=\"href://org.omg/UML/1.3\" xmi.version=\"1.1\">
     <XMI.header>

@@ -1,54 +1,64 @@
 (*
-  Puml2xml - A PlantUML to XML generator
+  Puml2xml - A PlantUML to XML converter
   @khalidbelk, 2025
   File: parse.ml
 *)
 
 open Types
-open Xml_gen
 
 let extract_class_name line =
-  let prefix = "class " in
-  let prefix_length = String.length prefix in
-  if String.starts_with ~prefix line then
-    let after_class = String.trim (String.sub line (prefix_length) (String.length line - prefix_length)) in
-    match String.split_on_char '{' after_class with
-    | class_name::_ -> String.trim class_name
-    | [] -> after_class
-  else
-      ""
+  let words = String.split_on_char ' ' (String.trim line) in
+  let filtered = List.filter (fun s -> s <> "") words in
+  match filtered with
+    | "class" :: name :: _ -> String.trim (String.split_on_char '{' name |> List.hd)
+    | _ -> ""
 
-let extract_class_features line =
-  match String.split_on_char '{' line with
-  | _::content::_ ->
-    let content = String.trim content in
-    let content = String.sub content 0 (String.length content - 1) in
-    String.split_on_char '\n' content
-    |> List.filter (fun s -> String.trim s <> "")
+(* Gives us the access modifier from a sign *)
+let get_visibility sign =
+  match sign with
+    | '+' -> "public"
+    | '-' -> "private"
+    | '#' -> "protected"
+    | _ -> "unknown"
+
+let extract_class_features content=
+  let class_body = String.split_on_char '{' content in
+  match class_body with
+  | _::class_body::_ -> class_body
+    |> String.trim
+    |> String.split_on_char '\n'
+    |> List.filter (fun s -> String.trim s <> "" && String.trim s <> "}")
     |> List.map (fun s ->
-      let trimmed = String.trim s in
-      let visibility = match trimmed.[0] with
-        | '+' -> "public"
-        | '-' -> "private"
-        | '#' -> "protected"
-        | _ -> "unknown"
-      in
-      let name = String.trim (String.sub trimmed 1 (String.length trimmed - 1)) in
+      let trimmed_line = String.trim s in
+      let sign = trimmed_line.[0] in
+      let name = String.sub trimmed_line 1 (String.length trimmed_line - 1) in
       {
         name = name;
-        visibility = visibility;
+        visibility = get_visibility sign;
         id = "1";
-        feature_type = if String.contains trimmed '(' then Method else Attribute;
+        feature_type = if (String.contains trimmed_line '(') then Method else Attribute;
       }
     )
   | _ -> []
 
-let parse_class line =
-  let class_name = extract_class_name line in
-  let class_features = extract_class_features line in
-  let parsed_class = {
+let parse_class class_block (i: int) =
+  let class_name = extract_class_name class_block in
+  let class_features = extract_class_features class_block in
+  {
     name = class_name;
-    id = "cl0001";
+    id = Printf.sprintf "cl%04d" i;
     features = class_features
-  } in
-  class_to_xml parsed_class
+  }
+
+let split_classes (content: string) : string list =
+  let class_regex = Str.regexp "class[ \t\n]+\\([A-Za-z0-9_]+\\)[ \t\n]*{[^}]*}" in
+  let rec find_classes start acc =
+    try
+      let _ = Str.search_forward class_regex content start in
+      let class_content = Str.matched_string content in
+      find_classes (Str.match_end()) (class_content :: acc)
+    with Not_found ->
+      List.rev acc
+  in
+    find_classes 0 []
+

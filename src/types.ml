@@ -1,5 +1,5 @@
 (*
-  Puml2xml - A PlantUML to XML generator
+  Puml2xml - A PlantUML to XML converter
   @khalidbelk, 2025
   File: types.ml
 *)

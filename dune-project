@@ -17,9 +17,11 @@
 
 (package
  (name puml2xml)
- (synopsis "A short synopsis")
- (description "A longer description")
- (depends ocaml dune)
+ (synopsis "A PlantUML to XML converter")
+ (description "Convert .puml files to .xmi")
+ (depends
+  (ocaml (>= 4.08.0))
+  (dune (>= 3.16)))
  (tags
   (topics "to describe" your project)))
 
