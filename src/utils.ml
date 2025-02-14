@@ -28,4 +28,4 @@ let is_file_content_valid content =
   let contains_tags = contains content "@startuml" && contains content "@enduml" in
     match contains_tags with
       | true -> Ok ()
-      | false -> Error "Invalid puml file. Make sure your .puml file is valid"
+      | false -> Error "Invalid puml file. Please make sure your file content is valid first."
