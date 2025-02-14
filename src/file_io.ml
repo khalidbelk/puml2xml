@@ -10,11 +10,10 @@ let read_file filename =
   close_in input_ch;
   file_content
 
-let out_file = "out.xml"
-
-let writeToFile content =
+let write_to_file content filename =
   try
-    let output_channel = open_out out_file in
+    let out_filename = Filename.remove_extension filename ^ ".xmi" in
+    let output_channel = open_out out_filename in
     output_string output_channel content;
     close_out output_channel;
     Ok ()

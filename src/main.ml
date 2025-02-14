@@ -19,19 +19,18 @@ let generate content =
     |> String.concat "\n"
 
 let process_file file =
-  let open Result in
   is_file_extension_valid file
   >>= fun () ->
     let file_content = read_file file |> String.trim in
     is_file_content_valid file_content
-  >>= fun () -> Ok (generate file_content)
-  >>= writeToFile
+  >>= fun () ->
+      let generated_content = generate file_content in
+      write_to_file generated_content file
 
 let main () =
   match Array.to_list Sys.argv
   with
     | [_; "-h"] -> usage 0
-    | [_; "-write"] -> writeToFile "Hello from main"
     | [_; filename] ->
          (match process_file filename with
           | Ok _ -> Ok ()
