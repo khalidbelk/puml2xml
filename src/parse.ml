@@ -21,6 +21,17 @@ let get_visibility sign =
     | '#' -> "protected"
     | _ -> "unknown"
 
+let parse_feature feature_line =
+  let trimmed_line = String.trim feature_line in
+  let sign = trimmed_line.[0] in
+  let name = String.sub trimmed_line 1 (String.length trimmed_line - 1) in
+  {
+    name = name;
+    visibility = get_visibility sign;
+    id = "1";
+    feature_type = if (String.contains trimmed_line '(') then Method else Attribute;
+  }
+
 let extract_class_features content=
   let class_body = String.split_on_char '{' content in
   match class_body with
@@ -28,17 +39,7 @@ let extract_class_features content=
     |> String.trim
     |> String.split_on_char '\n'
     |> List.filter (fun s -> String.trim s <> "" && String.trim s <> "}")
-    |> List.map (fun s ->
-      let trimmed_line = String.trim s in
-      let sign = trimmed_line.[0] in
-      let name = String.sub trimmed_line 1 (String.length trimmed_line - 1) in
-      {
-        name = name;
-        visibility = get_visibility sign;
-        id = "1";
-        feature_type = if (String.contains trimmed_line '(') then Method else Attribute;
-      }
-    )
+    |> List.map parse_feature
   | _ -> []
 
 let parse_class class_block (i: int) =
