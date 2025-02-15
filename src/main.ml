@@ -7,16 +7,18 @@
 open File_io
 open Parse
 open Xml_gen
+open Xml_chunks
 open Utils
 
 let ( >>= ) = Result.bind
 
 let generate content =
-  content
+  let processed_content = content
     |> split_classes
     |> List.mapi (fun i class_block -> parse_class class_block (i + 1))
     |> List.map class_to_xml
     |> String.concat "\n"
+  in xml_header ^ processed_content ^ xml_footer
 
 let process_file file out_file =
   is_file_extension_valid file

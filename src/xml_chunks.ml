@@ -15,11 +15,12 @@ let xml_header = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><XMI xmlns:UML=\"hre
         <XMI.metamodel xmi.name=\"UML\" xmi.version=\"1.4\"/>
     </XMI.header>
     <XMI.content>
-            <UML:Model name=\"PlantUML\" xmi.id=\"model1\">
+        <UML:Model name=\"PlantUML\" xmi.id=\"model1\">
             <UML:Namespace.ownedElement>
 "
 
-let xml_footer = "            </UML:Namespace.ownedElement>
+let xml_footer = "
+            </UML:Namespace.ownedElement>
         </UML:Model>
     </XMI.content>
 </XMI>
