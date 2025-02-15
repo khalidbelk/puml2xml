@@ -1,4 +1,4 @@
-# Puml2xml 🌱
+# Puml2xml 🌱➡️📄
 
 <div align="center">
     <a href="https://github.com/khalidbelk/puml2xml/actions/workflows/build-ubuntu.yml">
