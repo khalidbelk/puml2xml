@@ -21,12 +21,17 @@ let get_visibility sign =
     | '#' -> "protected"
     | _ -> "unknown"
 
+let format_name name =
+  name
+    |> Str.global_replace (Str.regexp "<") "&lt;"
+    |> Str.global_replace (Str.regexp ">") "&gt;"
+
 let parse_feature feature_line =
   let trimmed_line = String.trim feature_line in
   let sign = trimmed_line.[0] in
   let name = String.sub trimmed_line 1 (String.length trimmed_line - 1) in
   {
-    name = name;
+    name = format_name name;
     visibility = get_visibility sign;
     id = "1";
     feature_type = if (String.contains trimmed_line '(') then Method else Attribute;
