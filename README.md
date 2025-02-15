@@ -1,5 +1,16 @@
 # Puml2xml 🌱
 
+<div align="center">
+    <a href="https://github.com/khalidbelk/puml2xml/actions/workflows/build-ubuntu.yml">
+        <img src="https://github.com/khalidbelk/puml2xml/actions/workflows/build-ubuntu.yml/badge.svg?branch=main" alt="ubuntu-latest"></a>
+      &nbsp;&nbsp;&nbsp;&nbsp;  <!-- Spaces -->
+  <a href="https://github.com/khalidbelk/puml2xml/actions/workflows/build-macos.yml">
+    <img src="https://github.com/khalidbelk/puml2xml/actions/workflows/build-macos.yml/badge.svg?branch=main" alt="macOS-latest">
+  </a>
+</div>
+
+<br>
+
 A **PlantUML** (.puml) to **XML** (.xmi) converter.
 
 ### Prerequisites
