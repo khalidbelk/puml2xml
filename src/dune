@@ -9,5 +9,6 @@
     parse
     xml_gen
     utils
+    parse_utils
   )
 )

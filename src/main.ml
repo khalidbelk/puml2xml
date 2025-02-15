@@ -13,9 +13,11 @@ open Utils
 let ( >>= ) = Result.bind
 
 let generate content =
-  let processed_content = content
-    |> split_classes
-    |> List.mapi (fun i class_block -> parse_class class_block (i + 1))
+  let classes = split_classes content in
+  let att_count = ref (count_global_attributes classes) in
+  let processed_content =
+    classes
+    |> List.mapi (fun i class_block -> parse_class class_block (i + 1) att_count)
     |> List.map class_to_xml
     |> String.concat "\n"
   in xml_header ^ processed_content ^ xml_footer
