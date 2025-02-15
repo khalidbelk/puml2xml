@@ -5,10 +5,11 @@
 *)
 
 let usage exitcode =
-  print_endline "USAGE: ./puml2xml [OPTIONS]\n";
+  print_endline "USAGE: ./puml2xml <file> [OPTIONS]\n";
+  print_endline "   <file>          : the relative path of the .puml file to convert\n";
   print_endline "OPTIONS:";
-  print_endline "   file  : the relative path of the .puml file to convert";
-  print_endline "   -h    : display this message\n";
+  print_endline "   -f <new_name>   : specify the output file name. Default: same as input with .xmi extension.";
+  print_endline "   -h              : display this message\n";
   exit exitcode
 
 let contains str1 str2 =
