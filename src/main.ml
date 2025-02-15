@@ -18,23 +18,28 @@ let generate content =
     |> List.map class_to_xml
     |> String.concat "\n"
 
-let process_file file =
+let process_file file out_file =
   is_file_extension_valid file
   >>= fun () ->
     let file_content = read_file file |> String.trim in
     is_file_content_valid file_content
   >>= fun () ->
       let generated_content = generate file_content in
-      write_to_file generated_content file
+      write_to_file generated_content (Option.value out_file ~default:file)
+
+let handle_process filename opt_out_filename =
+  match process_file filename opt_out_filename with
+  | Ok _ -> Ok ()
+  | Error msg -> Printf.eprintf "Error: %s\n" msg; Error msg
 
 let main () =
   match Array.to_list Sys.argv
   with
     | [_; "-h"] -> usage 0
     | [_; filename] ->
-         (match process_file filename with
-          | Ok _ -> Ok ()
-          | Error msg -> Printf.eprintf "Error: %s\n" msg; Error msg)
+        handle_process filename None
+    | [_; filename ; "-f"; new_name ] ->
+        handle_process filename (Some new_name)
     | _ -> usage 1
 
 let () = match main () with
