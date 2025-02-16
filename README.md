@@ -5,11 +5,10 @@
         <img src="https://github.com/khalidbelk/puml2xml/actions/workflows/build-ubuntu.yml/badge.svg?branch=main" alt="ubuntu-latest"></a>
       &nbsp;&nbsp;&nbsp;&nbsp;  <!-- Spaces -->
   <a href="https://github.com/khalidbelk/puml2xml/actions/workflows/build-macos.yml">
-    <img src="https://github.com/khalidbelk/puml2xml/actions/workflows/build-macos.yml/badge.svg?branch=main" alt="macOS-latest">
+    <img src="https://github.com/khalidbelk/puml2xml/actions/workflows/build-macos.yml/badge.svg?branch=main" alt="macOS-latest"></a>
     &nbsp;&nbsp;&nbsp;&nbsp;  <!-- Spaces -->
   <a href="https://github.com/khalidbelk/puml2xml/actions/workflows/docker-build.yml">
     <img src="https://github.com/khalidbelk/puml2xml/actions/workflows/docker-build.yml/badge.svg?branch=main" alt="Docker Build">
-  </a>
   </a>
 </div>
 
