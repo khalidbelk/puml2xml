@@ -13,5 +13,3 @@ RUN opam install -y dune
 USER root
 
 RUN eval $(opam env) && make
-
-CMD ["./puml2xml"]
