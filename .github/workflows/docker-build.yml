@@ -1,0 +1,26 @@
+name: 🐳 Docker Build
+
+on:
+  push:
+    branches: [main, dev, testCI]
+
+jobs:
+
+  docker-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Build Docker image
+        run: docker build -t puml2xml .
+
+      - name: Run Docker container - Smoke Test
+        run: |
+          docker run --rm -d --name test-container puml2xml
+          sleep 5
+          if ! docker ps | grep test-container; then
+            echo "Container did not start correctly"
+            exit 1
+          fi
+          docker stop test-container
