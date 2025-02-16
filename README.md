@@ -15,17 +15,19 @@ A **PlantUML** (.puml) to **XML** (.xmi) converter.
 
 ### Prerequisites
 
-Before starting, ensure you have the following dependencies installed locally:
+Before starting, If you want to run it locally, ensure you have the following dependencies installed, otherwise **you'll just need Docker**, and can ignore this :
 
 - **dune** (v**3.16** or higher)
 - **OCaml** (v**4.08.0** or higher)
 - **make**
 
-### Usage
+## Installation
 
 **Steps**
 
 1. Clone this repository and open it
+
+### Local install
 
 2. Compile the program with the command
 
@@ -33,7 +35,26 @@ Before starting, ensure you have the following dependencies installed locally:
 make
 ```
 
-3. Then you can use it as specified here :
+### Docker 🐳
+
+2. Build the image with the command
+
+```
+docker build -t puml2xml .
+```
+
+3.  Run the container
+
+```
+docker run --rm -v $(pwd):/data/input puml2xml ./puml2xml /data/input/<yourfile.puml>
+```
+
+> Note: for this last command, you'll just have to replace <yourfile.puml> by the .puml file you want to convert (located in your current directory).
+
+
+## Usage
+
+You can use it as specified here :
 
 ```
 USAGE: ./puml2xml <file> [OPTIONS]
