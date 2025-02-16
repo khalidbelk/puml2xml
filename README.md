@@ -6,6 +6,10 @@
       &nbsp;&nbsp;&nbsp;&nbsp;  <!-- Spaces -->
   <a href="https://github.com/khalidbelk/puml2xml/actions/workflows/build-macos.yml">
     <img src="https://github.com/khalidbelk/puml2xml/actions/workflows/build-macos.yml/badge.svg?branch=main" alt="macOS-latest">
+    &nbsp;&nbsp;&nbsp;&nbsp;  <!-- Spaces -->
+  <a href="https://github.com/khalidbelk/puml2xml/actions/workflows/docker-build.yml">
+    <img src="https://github.com/khalidbelk/puml2xml/actions/workflows/docker-build.yml/badge.svg?branch=main" alt="Docker Build">
+  </a>
   </a>
 </div>
 
