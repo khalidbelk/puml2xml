@@ -3,6 +3,8 @@ name: 🐳 Docker Build
 on:
   push:
     branches: [main, dev, testCI]
+  pull_request:
+    branches: [main]
 
 jobs:
 
